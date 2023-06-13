@@ -3,7 +3,9 @@ package com.example.graphproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -89,17 +91,17 @@ private val textNameValue = mutableListOf(
 )
 
 var EntryData = entryModelOf(
-    entriesOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1),
-    entriesOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3)
+    entriesOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1), //negative data
+    entriesOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3) //negative data
 )
 
 private val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { i, _ ->
-    if ( i< 10) {
-        "0${i+1}.02.2023"
 
-    }
-    else {
-        "${i+1}.02.2023"
+    if (i < 10) {
+        "0${i.toInt() + 1}.02.2023"
+
+    } else {
+        "${i.toInt() + 1}.02.2023"
     }
 }
 
@@ -116,14 +118,13 @@ fun DoubleBar(): Unit = VicoTheme {
             state = pagerState,
             key = { it },
             modifier = Modifier.fillMaxHeight(0.4f)
-        ) {index ->
+        ) { index ->
             // Our order chart
-            if (index == 0){
+            if (index == 0) {
                 Chart(
                     modifier = Modifier
-                        .fillMaxHeight(0.4f)
-                        .zIndex(1f)
-                    , // set height chart 40%
+                        .fillMaxHeight()
+                        .zIndex(1f), // set height chart 40%
                     chart = columnChart(
                         columns = listOf(
                             lineComponent(
@@ -154,7 +155,8 @@ fun DoubleBar(): Unit = VicoTheme {
                             color = axisNumericalColor,
                             textSize = 10.sp,
                             background = shapeComponent(
-                                shape = CutCornerShape(  //change shaps one bar
+                                shape = CutCornerShape(
+                                    //change shaps one bar
                                     CornerSize(percent = 25),
                                     CornerSize(percent = 50),
                                     CornerSize(percent = 50),
@@ -167,7 +169,8 @@ fun DoubleBar(): Unit = VicoTheme {
                         axis = null
                         tick = null
                         guideline = LineComponent(
-                            axisNumericalColor.copy(alpha = 0.1f).toArgb(), // color lines indicators
+                            axisNumericalColor.copy(alpha = 0.1f)
+                                .toArgb(), // color lines indicators
                             1.dp.value,
                         )
                     },
@@ -181,18 +184,49 @@ fun DoubleBar(): Unit = VicoTheme {
                     model = @Suppress("MagicNumber") (EntryData), // our data from poutside for graph
                     chartScrollSpec = rememberChartScrollSpec(isScrollEnabled = true),
                 )
-            }
-            else{
-                Row(
-                    modifier = Modifier.fillMaxHeight(0.4f).zIndex(1f)
-                ) {
-                    Text(
-                        text = "TWEDSDSADd",
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.Gray
-                    )
+            } else {
+                Column() {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth()
+                            .zIndex(1f)
+                            .padding(top = 4.dp, bottom = 4.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .weight(.33f)
+                                .border(BorderStroke(1.dp, Color.Black))
+                            ,
+                            text = "Дата",
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Black
+                        )
+                        Text(
+                            modifier = Modifier
+                                .weight(.33f)
+                                .border(BorderStroke(1.dp, Color.Black))
+                            ,
+                            text = "Заказано,шт",
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Black
+                        )
+                        Text(
+                            modifier = Modifier
+                                .weight(.33f)
+                                .border(BorderStroke(1.dp, Color.Black)),
+                            text = "Отгружено,шт",
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Black
+                        )
+                    }
                 }
             }
 
@@ -200,8 +234,9 @@ fun DoubleBar(): Unit = VicoTheme {
 
         //Text Data
         //Inside Rows (LazyRow( Column : 2Element))
-        Row(modifier = Modifier
-            .fillMaxWidth()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
 
         )
         {
