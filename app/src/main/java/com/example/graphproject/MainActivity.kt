@@ -1,6 +1,9 @@
 package com.example.graphproject
 
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -11,22 +14,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-
-
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material3.Divider
+import androidx.compose.material.TabPosition
+import androidx.compose.material.TabRow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -54,6 +56,7 @@ import com.patrykandpatrick.vico.core.axis.vertical.createVerticalAxis
 import com.patrykandpatrick.vico.core.component.shape.LineComponent
 import com.patrykandpatrick.vico.core.entry.entriesOf
 import com.patrykandpatrick.vico.core.entry.entryModelOf
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -107,14 +110,25 @@ private val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bott
     }
 }
 
+fun getScreenWidth(context:Context): Float {
+    val px =  Resources.getSystem().displayMetrics.widthPixels * 0.5.toInt()
+    return px.toFloat() / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 fun DoubleBar(): Unit = VicoTheme {
 
+    val pagerState = rememberPagerState()
+    val coroutineScope = rememberCoroutineScope()
+    val indicator = @Composable { tabPositions: List<TabPosition> ->
+        CustomIndicator(tabPositions, pagerState)
+    }
+
     Column(modifier = Modifier.fillMaxWidth()) {
 
-        val pagerState = rememberPagerState()
+
         HorizontalPager(
             count = 2,//set 2 pages chart and Table
             state = pagerState,
@@ -236,13 +250,59 @@ fun DoubleBar(): Unit = VicoTheme {
 
         //Text Data
         //Inside Rows (LazyRow( Column : 2Element))
-        Row(
+        TabRow(  // for not listed row use TabRow else ScrolledTabRow
             modifier = Modifier
                 .fillMaxWidth()
-
+                .zIndex(2f), // position our not forget
+            selectedTabIndex = pagerState.currentPage,
+            indicator = indicator,
+            backgroundColor = Color.White.copy(alpha = 0.0f) // transparent background
         )
         {
-            LazyRow(
+            repeat(2){index ->  //Draw two similar elements
+                Tab(
+                    modifier = Modifier
+                        .zIndex(2f)
+                        .fillMaxWidth()
+                    ,
+                    selected = pagerState.currentPage == index,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                ){
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth(0.97f),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                    ) {
+                        itemsIndexed(textNameValue) { _, text ->
+                            Column(
+                                modifier = Modifier
+                                    .padding(horizontal = 2.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    text = text.name,
+                                    textAlign = TextAlign.Center,
+                                    maxLines = 1,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color.Gray
+                                )
+                                Text(
+                                    text = text.value + " шт",
+                                    textAlign = TextAlign.Center,
+                                    maxLines = 1,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color.Gray
+                                )
+
+                            }
+                        }
+
+                    }
+                }
+            }
+            /*LazyRow(
                 modifier = Modifier.fillMaxWidth(0.5f),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
@@ -305,7 +365,7 @@ fun DoubleBar(): Unit = VicoTheme {
                     }
 
                 }
-            }
+            }*/
         }
 
 

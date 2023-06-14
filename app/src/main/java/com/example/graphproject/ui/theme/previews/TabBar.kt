@@ -1,6 +1,5 @@
 package com.example.graphproject.ui.theme.previews
 
-import android.util.Log
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
@@ -66,7 +65,6 @@ fun TabBar() {
                 text = { Text(text = title) },
                 selected = pagerState.currentPage == index,
                 onClick = {
-                    Log.d("SD", index.toString())
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(index)
                     }
