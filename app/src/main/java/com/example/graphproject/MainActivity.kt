@@ -16,8 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
+
+
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.example.graphproject.ui.theme.GraphProjectTheme
 import com.example.graphproject.ui.theme.previews.utils.VicoTheme
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.patrykandpatrick.vico.compose.axis.horizontal.bottomAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.column.columnChart
@@ -114,10 +116,10 @@ fun DoubleBar(): Unit = VicoTheme {
 
         val pagerState = rememberPagerState()
         HorizontalPager(
-            pageCount = 2,//set 2 pages chart and Table
+            count = 2,//set 2 pages chart and Table
             state = pagerState,
-            key = { it },
-            modifier = Modifier.fillMaxHeight(0.4f)
+            key = { it }, //key by index
+            modifier = Modifier.fillMaxHeight(0.4f) // 40% our height
         ) { index ->
             // Our order chart
             if (index == 0) {
