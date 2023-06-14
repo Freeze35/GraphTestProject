@@ -56,7 +56,7 @@ fun TabBar() {
     }
 
     ScrollableTabRow(
-        modifier = Modifier.height(50.dp),
+        modifier = Modifier.height(50.dp).zIndex(2f), // set necessary for change tab. not forget
         selectedTabIndex = pagerState.currentPage,
         indicator = indicator
     ) {
@@ -68,7 +68,7 @@ fun TabBar() {
                 onClick = {
                     Log.d("SD", index.toString())
                     coroutineScope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        pagerState.animateScrollToPage(index)
                     }
                           },
             )
@@ -137,8 +137,8 @@ private fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerSt
             .width(indicatorEnd - indicatorStart)
             .padding(2.dp)
             .fillMaxSize()
-            .background(color = Color(0xFFFF7455), RoundedCornerShape(50))
-            .border(BorderStroke(2.dp, Color(0xFFC13D25)), RoundedCornerShape(50))
+            .background(color = Color(0xFF5580FF), RoundedCornerShape(50))
+            .border(BorderStroke(2.dp, Color(0xFF92C5DD)), RoundedCornerShape(50))
             .zIndex(1f)
     )
 }
