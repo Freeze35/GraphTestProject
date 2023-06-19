@@ -22,3 +22,16 @@ OrderEnvirovmentModule
 экземпляр на протяжении всего жизненного цикла этой ViewModel.  
 
 ```
+
+При добавлении приввязки данных через envirovnent в обработке фалов в OrderViewModule
+
+передача данных в график посреством entryModelOf принимает на себя значение только из Array
+```
+val PositiveGraph = arrayOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+
+    var entryData = entryModelOf(
+        entriesOf(*PositiveGraph)
+    entriesOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3) //negative data
+)
+
+```

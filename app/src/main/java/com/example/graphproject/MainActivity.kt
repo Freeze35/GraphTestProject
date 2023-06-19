@@ -1,9 +1,6 @@
 package com.example.graphproject
 
-import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -88,18 +85,6 @@ data class HeadData(
     var value: String,
 )
 
-//Data for showing many text and set them numbers(or text)
-private val textNameValue = mutableListOf(
-    HeadData("За месяц", "24"),
-    HeadData("По клиенту", "44"),
-    HeadData("По точке", "34")
-)
-
-var EntryData = entryModelOf(
-    entriesOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1), //negative data
-    entriesOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3) //negative data
-)
-
 private val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { i, _ ->
 
     if (i < 10) {
@@ -110,15 +95,26 @@ private val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bott
     }
 }
 
-fun getScreenWidth(context:Context): Float {
-    val px =  Resources.getSystem().displayMetrics.widthPixels * 0.5.toInt()
-    return px.toFloat() / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-}
-
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
 fun DoubleBar(): Unit = VicoTheme {
+
+    //Data for showing many text and set them numbers(or text)
+    val textNameValue = mutableListOf(
+        HeadData("За месяц", "24"),
+        HeadData("По клиенту", "44"),
+        HeadData("По точке", "34")
+    )
+
+    //change input format data to Array
+    val PositiveGraph = arrayOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+    val NegativeGraph = arrayOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3)
+
+    var entryData = entryModelOf(
+        entriesOf(*PositiveGraph), //first bar data
+        entriesOf(*NegativeGraph) //negative data
+    )
 
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
@@ -197,7 +193,7 @@ fun DoubleBar(): Unit = VicoTheme {
                         ),
                         valueFormatter = axisValueFormatter // See above for the description of the bottom axle
                     ),
-                    model = @Suppress("MagicNumber") (EntryData), // our data from poutside for graph
+                    model = @Suppress("MagicNumber") (entryData), // our data for graph
                     chartScrollSpec = rememberChartScrollSpec(isScrollEnabled = true),
                 )
             } else {
