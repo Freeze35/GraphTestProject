@@ -27,11 +27,35 @@ OrderEnvirovmentModule
 
 передача данных в график посреством entryModelOf принимает на себя значение только из Array
 ```
+var productsQuantity= mutableListOf<Int>(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+
 val PositiveGraph = arrayOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+val PositiveGraph = productsQuantity.toTypedArray() // or it's
 
     var entryData = entryModelOf(
         entriesOf(*PositiveGraph)
     entriesOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3) //negative data
 )
 
+```
+
+## Solving решение несовпадение внутренних врсий зависисмости для библиотеки accomponist
+```
+compose_version = 1.3.0-alpha03
+kotlinCompilerExtensionVersion = 1.3.0
+kotlin_version & org.jetbrains.kotlin.android = 1.7.10
+Accompanist 0.26.1-alpha
+
+```
+
+and transfer version hilt [hilt:2.44](https://stackoverflow.com/questions/67744002/hilt-unsupported-metadata-version-in-kotlin)
+
+```
+в build.gradle на уровне проекта изменить версию
+
+id 'com.google.dagger.hilt.android' version '2.44' apply false
+
+На уровне приложения build.gradle
+implementation "com.google.dagger:hilt-android:2.44"
+kapt "com.google.dagger:hilt-compiler:2.44"
 ```

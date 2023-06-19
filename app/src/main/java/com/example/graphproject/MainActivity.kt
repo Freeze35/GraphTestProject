@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.TabPosition
 import androidx.compose.material.TabRow
@@ -73,32 +75,34 @@ class MainActivity : ComponentActivity() {
 }
 
 
-val positiveColor: Color = Color(0xFF48FF85)
-val positiveColor2: Color = Color(0xFF00FCD6)
-val negativeColor: Color = Color(0xFFF5A6B5)
-val negativeColor2: Color = Color(0xFFE40123)
-val axisNumericalColor: Color = Color(0xFF48FF85)
-
 //Class for our text field
 data class HeadData(
     var name: String,
     var value: String,
 )
 
-private val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { i, _ ->
-
-    if (i < 10) {
-        "0${i.toInt() + 1}.02.2023"
-
-    } else {
-        "${i.toInt() + 1}.02.2023"
-    }
-}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
 @Composable
-fun DoubleBar(): Unit = VicoTheme {
+fun DoubleBar() = VicoTheme {
+
+    val positiveColor = Color(0xFF48FF85)
+    val positiveColor2 = Color(0xFF00FCD6)
+    val negativeColor = Color(0xFFF5A6B5)
+    val negativeColor2 = Color(0xFFE40123)
+    val axisNumericalColor = Color(0xFF48FF85)
+
+
+    val axisValueFormatter = AxisValueFormatter<AxisPosition.Horizontal.Bottom> { i, _ ->
+
+        if (i < 9) {
+            "0${i.toInt() + 1}.02.2023"
+
+        } else {
+            "${i.toInt() + 1}.02.2023"
+        }
+    }
 
     //Data for showing many text and set them numbers(or text)
     val textNameValue = mutableListOf(
@@ -107,11 +111,13 @@ fun DoubleBar(): Unit = VicoTheme {
         HeadData("По точке", "34")
     )
 
+    val productsQuantity= mutableListOf<Int>(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+
     //change input format data to Array
-    val PositiveGraph = arrayOf(3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1,3, 2, 2, 3, 1, 3, 2, 2, 3, 1)
+    val PositiveGraph = productsQuantity.toTypedArray()
     val NegativeGraph = arrayOf(1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3,1, 3, 1, 2, 3, 1, 3, 1, 2, 3)
 
-    var entryData = entryModelOf(
+    val entryData = entryModelOf(
         entriesOf(*PositiveGraph), //first bar data
         entriesOf(*NegativeGraph) //negative data
     )
@@ -124,7 +130,18 @@ fun DoubleBar(): Unit = VicoTheme {
 
     Column(modifier = Modifier.fillMaxWidth()) {
 
+        //Calendar butoon selector
+        Button(
+            modifier = Modifier
+                .fillMaxHeight(0.1f)
+                .fillMaxWidth()
+                .background(Color.Black)
+            ,
+            onClick = { /*TODO*/ }) {
 
+        }
+
+        //Our Graph and Table
         HorizontalPager(
             count = 2,//set 2 pages chart and Table
             state = pagerState,
@@ -203,14 +220,14 @@ fun DoubleBar(): Unit = VicoTheme {
                             .fillMaxHeight()
                             .fillMaxWidth()
                             .zIndex(1f)
-                            .padding(top = 4.dp, bottom = 4.dp),
+                            .padding(all = 4.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         Text(
                             modifier = Modifier
                                 .weight(.33f)
                                 .border(BorderStroke(1.dp, Color.Black))
-                            ,
+                                .padding(top = 4.dp, bottom = 4.dp),
                             text = "Дата",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
@@ -221,7 +238,7 @@ fun DoubleBar(): Unit = VicoTheme {
                             modifier = Modifier
                                 .weight(.33f)
                                 .border(BorderStroke(1.dp, Color.Black))
-                            ,
+                                .padding(top = 4.dp, bottom = 4.dp),
                             text = "Заказано,шт",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
@@ -231,7 +248,8 @@ fun DoubleBar(): Unit = VicoTheme {
                         Text(
                             modifier = Modifier
                                 .weight(.33f)
-                                .border(BorderStroke(1.dp, Color.Black)),
+                                .border(BorderStroke(1.dp, Color.Black))
+                                .padding(top = 4.dp, bottom = 4.dp),
                             text = "Отгружено,шт",
                             textAlign = TextAlign.Center,
                             maxLines = 1,
@@ -298,72 +316,6 @@ fun DoubleBar(): Unit = VicoTheme {
                     }
                 }
             }
-            /*LazyRow(
-                modifier = Modifier.fillMaxWidth(0.5f),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-            ) {
-                itemsIndexed(textNameValue) { _, text ->
-                    Column(
-                        modifier = Modifier
-                            .padding(horizontal = 2.dp, vertical = 2.dp)
-                    ) {
-                        Text(
-                            text = text.name,
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
-                        Text(
-                            text = text.value + " шт",
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
-                    }
-
-                }
-            }
-            //Split Line
-            Divider(
-                color = Color.Black,
-                modifier = Modifier //fill the max height
-                    .width(1.dp)
-                    .padding(top = 7.dp) //padding top
-                    .height(26.dp) // height divider
-            )
-
-            //Right Side
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-            ) {
-                itemsIndexed(textNameValue) { _, text ->
-                    Column(
-                        modifier = Modifier
-                            .padding(horizontal = 2.dp, vertical = 2.dp)
-                    ) {
-                        Text(
-                            text = text.name,
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
-                        Text(
-                            text = text.value + " шт",
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
-                        )
-                    }
-
-                }
-            }*/
         }
-
-
     }
 }

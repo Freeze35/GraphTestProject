@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -26,7 +25,6 @@ import com.google.accompanist.pager.PagerState
 
 
 //Custom animation for change background, selected position, Rounded background
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerState) {
     val transition = updateTransition(pagerState.currentPage)
@@ -35,7 +33,7 @@ fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerState) {
             if (initialState < targetState) {
                 spring(dampingRatio = 1f, stiffness = 50f)
             } else {
-                spring(dampingRatio = 1f, stiffness = 1000f)
+                spring(dampingRatio = 1f, stiffness = 500f)
             }
         }, label = ""
     ) {
@@ -45,7 +43,7 @@ fun CustomIndicator(tabPositions: List<TabPosition>, pagerState: PagerState) {
     val indicatorEnd by transition.animateDp(
         transitionSpec = {
             if (initialState < targetState) {
-                spring(dampingRatio = 1f, stiffness = 1000f)
+                spring(dampingRatio = 1f, stiffness = 500f)
             } else {
                 spring(dampingRatio = 1f, stiffness = 50f)
             }
