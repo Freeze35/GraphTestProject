@@ -45,7 +45,6 @@ compose_version = 1.3.0-alpha03
 kotlinCompilerExtensionVersion = 1.3.0
 kotlin_version & org.jetbrains.kotlin.android = 1.7.10
 Accompanist 0.26.1-alpha
-
 ```
 
 and transfer version hilt [hilt:2.44](https://stackoverflow.com/questions/67744002/hilt-unsupported-metadata-version-in-kotlin)
