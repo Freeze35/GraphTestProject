@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.example.graphproject.ui.theme.GraphProjectTheme
-import com.example.graphproject.ui.theme.previews.utils.VicoTheme
+import com.example.graphproject.previews.utils.VicoTheme
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.patrykandpatrick.vico.compose.axis.horizontal.bottomAxis

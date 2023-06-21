@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package com.example.graphproject.ui.theme.previews.files
+package com.example.graphproject.previews.files
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel

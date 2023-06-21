@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.graphproject.ui.theme.previews
+package com.example.graphproject.previews
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape

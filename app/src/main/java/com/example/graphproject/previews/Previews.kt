@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.graphproject.ui.theme.previews
+package com.example.graphproject.previews
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -34,7 +34,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.graphproject.ui.theme.previews.utils.VicoTheme
+import com.example.graphproject.previews.utils.VicoTheme
 
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.column.columnChart

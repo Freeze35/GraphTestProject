@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.example.graphproject.ui.theme.previews
+package com.example.graphproject.previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

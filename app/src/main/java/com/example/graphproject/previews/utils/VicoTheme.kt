@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.graphproject.ui.theme.previews.utils
+package com.example.graphproject.previews.utils
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -58,3 +58,6 @@ id 'com.google.dagger.hilt.android' version '2.44' apply false
 implementation "com.google.dagger:hilt-android:2.44"
 kapt "com.google.dagger:hilt-compiler:2.44"
 ```
+
+[Sheets-Compose-Dialogs](https://github.com/maxkeppeler/sheets-compose-dialogs)  
+[Doks -> Sheets-Compose-Dialogs](https://maxkeppeler.notion.site/Sheets-Compose-Dialogs-804f0ebcb2c84b98b7afa5f687295aed)

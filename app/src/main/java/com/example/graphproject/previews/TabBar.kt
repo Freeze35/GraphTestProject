@@ -1,4 +1,4 @@
-package com.example.graphproject.ui.theme.previews
+package com.example.graphproject.previews
 
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.spring
@@ -54,6 +54,8 @@ fun TabBar() {
         CustomIndicator(tabPositions, pagerState)
     }
 
+    //for fixed position size use TabRow
+    //for many values better ScrollableTabRow
     ScrollableTabRow(
         modifier = Modifier.height(50.dp).zIndex(2f), // set necessary for change tab. not forget
         selectedTabIndex = pagerState.currentPage,
