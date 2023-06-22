@@ -58,6 +58,58 @@ id 'com.google.dagger.hilt.android' version '2.44' apply false
 implementation "com.google.dagger:hilt-android:2.44"
 kapt "com.google.dagger:hilt-compiler:2.44"
 ```
-
+### Calendar // Time
 [Sheets-Compose-Dialogs](https://github.com/maxkeppeler/sheets-compose-dialogs)  
 [Doks -> Sheets-Compose-Dialogs](https://maxkeppeler.notion.site/Sheets-Compose-Dialogs-804f0ebcb2c84b98b7afa5f687295aed)
+
+### Date formatter
+```
+For supportin min version 24 sdk change Date formatter 
+Down for different version gradle (coreLibraryDesugaringEnabled / isCoreLibraryDesugaringEnabled)
+android {
+    defaultConfig {
+        // Required when setting minSdkVersion to 20 or lower
+        multiDexEnabled = true
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+
+        // For AGP 4.1+
+        isCoreLibraryDesugaringEnabled = true
+        // For AGP 4.0
+        // coreLibraryDesugaringEnabled = true
+
+        // Sets Java compatibility to Java 8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.2")
+}
+
+```
+[Java 8+ API desugaring support](https://developer.android.com/studio/write/java8-support#kts)
+
+### CoreLibraryDesugaringEnabled
+```
+If you're using Android Gradle Plugin version >= 4.1, use:
+
+isCoreLibraryDesugaringEnabled = true
+For versions before that, use:
+
+coreLibraryDesugaringEnabled = true
+
+```
+[CoreLibraryDesugaringEnabled / isCoreLibraryDesugaringEnabled](https://stackoverflow.com/questions/63789699/iscorelibrarydesugaringenabled-not-works-in-gradle-kotlin-dsl-kts)
+
+### Change format date LocalDate to String in return in list format
+```
+val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+                val result = selectedDates.value.sortedByDescending {
+                    LocalDate.parse(it.toString(), dateTimeFormatter)
+                }.reversed()
+```

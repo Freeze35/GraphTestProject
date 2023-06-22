@@ -18,6 +18,8 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -28,20 +30,33 @@ fun CalendarSample() {
         val selectedDates = remember { mutableStateOf<List<LocalDate>>(listOf()) }
 
         Log.d("date",selectedDates.value.size.toString())
+
         CalendarDialog(
             state = calendarState,
             config = CalendarConfig(
                 monthSelection = true,
                 yearSelection = true
             ),
-            selection = CalendarSelection.Dates{
+            selection = CalendarSelection.Dates(onNegativeClick= { Log.d("onExtraButtonClick","onExtraButtonClick") }){
                     newDate ->
                 selectedDates.value = newDate
-                selectedDates.value.forEach { d->
+                selectedDates.value.map { d->
                     Log.d("date",d.toString())
                 }
+                Log.d("selectedDates.value", selectedDates.value.size.toString())
 
-            })
+                // current list sorted date reversed after sorting
+                // date formatter
+                val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                //sort
+                val result = selectedDates.value.sortedByDescending {
+                    LocalDate.parse(it.toString(), dateTimeFormatter)
+                }.reversed()
+
+                Log.d("resultresult", result.toString())
+            }
+
+        )
 
         Column(
             modifier = Modifier
