@@ -9,6 +9,8 @@ Add
 [accompanist ui horizontal pager](https://google.github.io/accompanist/pager/#horizontalpager)<br/>
 [Horizontal pager with tab animation](https://www.youtube.com/watch?v=ZdADYzYF7O8&ab_channel=MemoryLeak)
 
+Recommended Date for learning compose kotlin [valueof.io/jetpack-compose](https://www.valueof.io/jetpack-compose)
+
 MVVM Structure
 
 OrderEnvirovmentModule
