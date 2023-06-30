@@ -36,7 +36,7 @@ private val model = entryModelOf(2f, -1f, 4f, -2f, 1f, 5f, -3f)
 
 @Preview
 @Composable
-public fun SingleColumnChartWithNegativeValues() {
+fun SingleColumnChartWithNegativeValues() {
     val marker = rememberMarker()
     Surface {
         Chart(
@@ -45,6 +45,7 @@ public fun SingleColumnChartWithNegativeValues() {
                 persistentMarkers = mapOf(
                     2f to marker,
                     3f to marker,
+                    4f to marker,
                 ),
             ),
             model = model,
@@ -57,7 +58,7 @@ public fun SingleColumnChartWithNegativeValues() {
 
 @Preview
 @Composable
-public fun SingleColumnChartWithNegativeValuesAndDataLabels() {
+fun SingleColumnChartWithNegativeValuesAndDataLabels() {
     Surface {
         Chart(
             chart = columnChart(
@@ -72,7 +73,7 @@ public fun SingleColumnChartWithNegativeValuesAndDataLabels() {
 
 @Preview
 @Composable
-public fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden() {
+fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden() {
     Surface {
         Chart(
             chart = columnChart(
@@ -90,7 +91,7 @@ public fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden() {
 
 @Preview
 @Composable
-public fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden2() {
+fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden2() {
     Surface {
         Chart(
             chart = columnChart(

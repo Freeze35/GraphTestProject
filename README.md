@@ -115,3 +115,39 @@ val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-
                     LocalDate.parse(it.toString(), dateTimeFormatter)
                 }.reversed()
 ```
+
+### Fix [(current target it 1.8) and kaptGenerateStubsDebugKotlin task (current target is 17)](https://stackoverflow.com/questions/75480173/android-studio-build-error-compiledebugjavawithjavac-task-current-target-it-1)
+```
+build.gradle(:project)
+plugins {
+    id 'com.android.application' version '8.0.0' apply false
+    id 'com.android.library' version '8.0.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
+}
+build.gradle(:app)
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+```
+
+### [Error with Room dao class when using Kotlin coroutines](https://stackoverflow.com/questions/48694449/error-with-room-dao-class-when-using-kotlin-coroutines)
+
+### Fix gradle dependency [Kotlin + hilt error. [Hilt] and java.lang.reflect.InvocationTargetException](https://stackoverflow.com/questions/67811890/kotlin-hilt-error-hilt-and-java-lang-reflect-invocationtargetexception-no)
+```
+plugins {
+   id 'com.android.application'
+   id 'kotlin-android'
+   id 'kotlin-kapt'
+   id 'dagger.hilt.android.plugin'
+   id 'kotlin-parcelize'
+}
+
+implementation "com.google.dagger:hilt-android:2.28-alpha"
+kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+```
+
+### Fix-> (Change version above Kotlin version: 1.7.0) LayoutNode should be attached to an owner [Google questions](https://issuetracker.google.com/issues/219545359)

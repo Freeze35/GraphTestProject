@@ -62,7 +62,7 @@ private val chartModifier = Modifier.height(100.dp)
 
 @Preview("Sample Card With Column Chart", widthDp = 200)
 @Composable
-public fun ColumnChartCard(): Unit = VicoTheme {
+fun ColumnChartCard(): Unit = VicoTheme {
     val colors = MaterialTheme.colors
 
     SampleCard {
@@ -73,7 +73,7 @@ public fun ColumnChartCard(): Unit = VicoTheme {
                     lineComponent(
                         Color.Red,
                         thickness = 8.dp,
-                        shape = RoundedCornerShape(4.dp),
+                        //shape = RoundedCornerShape(4.dp),
                         dynamicShader = verticalGradient(arrayOf(colors.primary, colors.secondary)),
                     ),
                 ),
@@ -107,7 +107,7 @@ public fun ColumnChartCard(): Unit = VicoTheme {
 
 @Preview("Sample Card With Line Chart", widthDp = 200)
 @Composable
-public fun LineChartCard(): Unit = VicoTheme {
+fun LineChartCard(): Unit = VicoTheme {
     val colors = MaterialTheme.colors
 
     SampleCard {
