@@ -151,3 +151,5 @@ kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
 ```
 
 ### Fix-> (Change version above Kotlin version: 1.7.0) LayoutNode should be attached to an owner [Google questions](https://issuetracker.google.com/issues/219545359)
+
+### Login with Basic Auth in Kotlin with a GET requet API [Credentials.basic](https://stackoverflow.com/questions/52392380/how-do-i-make-a-login-with-basic-auth-in-kotlin-with-a-get-requet-api)
