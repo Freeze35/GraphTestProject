@@ -153,3 +153,25 @@ kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
 ### Fix-> (Change version above Kotlin version: 1.7.0) LayoutNode should be attached to an owner [Google questions](https://issuetracker.google.com/issues/219545359)
 
 ### Login with Basic Auth in Kotlin with a GET requet API [Credentials.basic](https://stackoverflow.com/questions/52392380/how-do-i-make-a-login-with-basic-auth-in-kotlin-with-a-get-requet-api)
+
+### Android Bitmap loader with closed stream [www.cyberforum.ru/java-gui/thread2831085.html](https://www.cyberforum.ru/java-gui/thread2831085.html)
+```
+private Bitmap getImageBitmap()
+    {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(IMAGE_PATH + NET_IMAGE);
+ 
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            Bitmap img = BitmapFactory.decodeStream(bis);
+ 
+            bis.close();
+            fis.close();
+ 
+            return img;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+```
