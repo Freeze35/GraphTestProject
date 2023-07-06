@@ -175,3 +175,92 @@ private Bitmap getImageBitmap()
         return null;
     }
 ```
+
+### Read and Write Json File using lib Gson ->[]()
+```
+
+Images data getting example -> using ktor
+
+suspend fun getAllImagesData(token: String): List<ImagesDataResponse> {
+        return try {
+                httpService.client.get {
+                    url {
+                        protocol = URLProtocol.HTTP
+                        host = preferenceService.encryptedSettings.getString(
+                            HsConstants.HOST,
+                            HsConstants.EMPTY
+                        )
+                        path("hs", "api", "v1", "product")
+                    }
+
+                    headers {
+                        append("api_key", token)
+                        append("queryType", "all")
+                        append("images", "1")
+                        /*append("id", id)  // for special call values
+                        append("units", "0")
+                        append("prices", "0")
+                        append("balances", "0")
+                        append("barcodes","0")
+                        append("videos","0")
+                        append("docks","0")*/
+
+                }
+            }
+
+        } catch (ex: Exception){
+            Log.d("Error getAllImagesData:",ex.toString())
+           return listOf<ImagesDataResponse>()
+        }
+    }
+```
+
+``` Write function to Json using read Gson
+    suspend fun getAllImagestoJSON(token:String){
+
+        val folder = getAnyDataDir()
+        val pathToJson = File(folder, "AllImagesData.json")
+        Log.d("Loading JSON started", pathToJson.toString())
+        //check existing json file
+        if (!pathToJson.exists()) {//check existing folder
+            pathToJson.createNewFile() }
+        else{
+            pathToJson.delete()
+            pathToJson.createNewFile()
+        }
+
+        // put string List with objects not typed to string
+        val urlImagesData = hsService.getAllImagesData(token)
+
+        val gson = Gson()
+        try {
+            //open file and change it in json
+           val json = gson.toJson(urlImagesData)
+            pathToJson.writeText(json)
+        }
+        catch (e: java.lang.Exception) {
+            e.printStackTrace()}
+
+        Log.d("DataImagesLoaded","DataImagesLoaded to $pathToJson")
+    }
+```
+### Read function get path from context 
+context getting from View model
+path = "${context.filesDir.absolutePath}/"
+```
+fun imagesDataJsonFromStorage(path: String): List<String> {
+    return try {
+        val f = File(path, "AllImagesData.json") // get access to current file
+        val gson = Gson()
+        val listImagesData = object : TypeToken<List<ImagesDataResponse>>() {}.type
+        val json = f.readText()
+        val readedJson:List<ImagesDataResponse> = gson.fromJson(json,listImagesData)
+        Log.d("readedJson",readedJson[20].Id.toString())
+        listOf()
+    } catch (e: FileNotFoundException) {
+        e.printStackTrace()
+        return listOf()
+    } finally {
+    }
+}
+```

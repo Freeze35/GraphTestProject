@@ -1,0 +1,67 @@
+/*fis = FileInputStream(f) // open file stream
+        val bis = BufferedInputStream(fis) // open buffer stream
+        // be sure to close the download stream otherwise there will be a memory leak.
+        val size = bis.available()
+        val buffer = ByteArray(size)
+        fis.read(buffer)
+        val returnString = String(buffer, Charsets.UTF_8)
+        //return string from json
+        Log.d("Restdsda",returnString)
+        Log.d("Restdsda", returnString.length.toString())
+        val gson = Gson()
+        //creaty type List<ImagesDataResponse>
+        val listImageData: Type = com.google.gson.reflect
+            .TypeToken.getParameterized(
+            List::class.java,ImagesDataResponse::class.java
+        ).type
+        var listData:List<ImagesDataResponse> = listOf()
+        // get data from json
+        if(returnString.length>2) {
+            listData = gson.fromJson(returnString, listImageData)
+        }
+        Log.d("Restdsda", listData.toString())*/
+
+
+        /*var newList: List<String> = returnString
+            .substring(1, returnString.length - 1)
+            .split("ImagesDataResponse")
+            .map { it.trim() }
+        newList = newList.filter { it.isNotEmpty() }
+
+        //newList[newList.size - 1].dropLast(2) //get last index and remove string "),"
+        newList = newList.mapIndexed { id,string->
+            var newString = string
+            // remove "(" and ")," , last remove ")"
+            if(id != newList.size-1){
+                newString = newString.drop(1).dropLast(2)
+                newString = "{$newString}"
+                newString
+            }
+            else{
+                newString = newString.dropLast(1).drop(1)
+                newString = "{$newString}"
+                newString
+            }
+        }*/
+        /*val respo =  newList.forEach {
+            Json.decodeFromString<ImagesDataResponse>(it)
+        }*/
+
+        //Log.d("Restdsda", Json.decodeFromString<ImagesDataResponse>(returnString).toString())
+       // Log.d("Restdsda", newList[newList.size-1].toString())
+        //Include system
+        /*newList.forEach { data->
+        }*/
+        /*newList.map { d ->
+            Log.d("sdasd", d)
+        }*/
+        // Log.d("Lasd",newList[newList.size-1])
+        /*newList.map {
+            Log.d("sdasd", returnString)
+        }*/
+        /*val listValue =  newList.map {
+            Json.decodeFromString<ImagesDataResponse>(it)
+        }*/
+        //val sdsd = JSONObject(returnString)
+
+        //val imageData = Json.decodeFromString<List<ImagesDataResponse>>(returnString)
