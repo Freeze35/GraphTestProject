@@ -264,3 +264,5 @@ fun imagesDataJsonFromStorage(path: String): List<String> {
     }
 }
 ```
+### Pager Library examples [riggaroo](https://github.com/riggaroo/compose-playtime/tree/main)
+[customizing-compose-pager-with-fun-indicators-and-transitions](https://medium.com/androiddevelopers/customizing-compose-pager-with-fun-indicators-and-transitions-12b3b69af2cc)

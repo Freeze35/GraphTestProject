@@ -83,7 +83,7 @@ fun SingleColumnChartWithNegativeValuesAndAxisValuesOverridden() {
                 ),
             ),
             model = model,
-            startAxis = startAxis(maxLabelCount = 4),
+            startAxis = startAxis(maxLabelCount = 1),
             bottomAxis = bottomAxis(),
         )
     }
