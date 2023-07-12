@@ -266,3 +266,11 @@ fun imagesDataJsonFromStorage(path: String): List<String> {
 ```
 ### Pager Library examples [riggaroo](https://github.com/riggaroo/compose-playtime/tree/main)
 [customizing-compose-pager-with-fun-indicators-and-transitions](https://medium.com/androiddevelopers/customizing-compose-pager-with-fun-indicators-and-transitions-12b3b69af2cc)
+
+### Autoboxing optimization android 
+To optimize the autoboxing of data, you should use the flow state, which caches information on transfer, narrowing the memory, and also note that in case of a call outside the @compose structure, you should add collectAsState() to value
+
+```
+MutableStateFlow(0)
+Month.collectAsState().value
+```
