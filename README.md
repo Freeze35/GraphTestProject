@@ -274,3 +274,13 @@ To optimize the autoboxing of data, you should use the flow state, which caches 
 MutableStateFlow(0)
 Month.collectAsState().value
 ```
+
+### Check String to Double and Int value
+
+```
+fun isNumeric(toCheck: String): Boolean {
+        val regex = "^[0-9]+\$".toRegex() // for Int
+        //val regex = "-?[0-9]+(\\.[0-9]+)?".toRegex() //for Double
+        return toCheck.matches(regex)
+    }
+```
