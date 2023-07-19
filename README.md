@@ -291,6 +291,18 @@ Room cannot verify the data integrity.
 Looks like you've changed schema but forgot to update the version number.  
 You can simply fix this by increasing the version number. Expected identity hash:  
 hash: a00f75eb84cd0a6776526242831c5ca4, found: 49bbd539885bc5d6be0e70cdc152e64d
-Solutin:  
+Solutin1:  
 android:allowBackup="true->false" Manifest.xml
 Remove Old Data for Serialization BD
+
+Sloution2: Create system Migration Android: [developer.android.com](https://developer.android.com/training/data-storage/room#db-migration)
+For kapt change version +1 and set AutoMigration ->
+```
+@Database(
+    entities = [Order::class, OrderProduct::class, Payment::class, Reserve::class],
+    version = 4,
+    autoMigrations = [
+        AutoMigration (from = 3, to = 4)
+    ]
+)
+```
