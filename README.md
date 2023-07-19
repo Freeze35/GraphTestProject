@@ -284,3 +284,13 @@ fun isNumeric(toCheck: String): Boolean {
         return toCheck.matches(regex)
     }
 ```
+
+### Problem of DB
+Stackoverflow [stackoverflow.com/questions/44197309/room-cannot-verify-the-data](https://stackoverflow.com/questions/44197309/room-cannot-verify-the-data-integrity)  
+Room cannot verify the data integrity.   
+Looks like you've changed schema but forgot to update the version number.  
+You can simply fix this by increasing the version number. Expected identity hash:  
+hash: a00f75eb84cd0a6776526242831c5ca4, found: 49bbd539885bc5d6be0e70cdc152e64d
+Solutin:  
+android:allowBackup="true->false" Manifest.xml
+Remove Old Data for Serialization BD
