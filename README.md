@@ -25,7 +25,7 @@ OrderEnvirovmentModule
 
 ```
 
-При добавлении приввязки данных через envirovnent в обработке фалов в OrderViewModule
+При добавлении привязки данных через envirovnent в обработке фалов в OrderViewModule
 
 передача данных в график посреством entryModelOf принимает на себя значение только из Array
 ```
