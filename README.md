@@ -41,7 +41,7 @@ val PositiveGraph = productsQuantity.toTypedArray() // or it's
 
 ```
 
-## Solving решение несовпадение внутренних врсий зависисмости для библиотеки accomponist
+## Solving решение несовпадение внутренних версий зависисмости для библиотеки accomponist
 ```
 compose_version = 1.3.0-alpha03
 kotlinCompilerExtensionVersion = 1.3.0
